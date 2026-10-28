@@ -1,0 +1,14 @@
+* LM7805_EDU - SIMPLIFIED EDUCATIONAL MODEL, NOT A VENDOR MODEL
+* Pin order: IN GND OUT
+* Functional behavior: output clamps near 5V when IN >= 7V,
+* approximates 2V dropout, approximately 5mA quiescent at 15.3V,
+* and approximate input current tracking for output load.
+* No realistic thermal shutdown, output-current limit, startup loop dynamics,
+* temperature effects, PSRR, or high frequency noise.
+.SUBCKT LM7805_EDU IN GND OUT
+BREF NREF GND V=limit(V(IN,GND)-2,0,5)
+R_OUT NREF OUT 0.08
+BLOAD IN GND I=limit(V(NREF,OUT)/0.08,0,10)
+R_IQ IN GND 3060
+RLEAK OUT GND 100Meg
+.ENDS LM7805_EDU
